@@ -8,23 +8,37 @@
 
 <body>
 
+    <div id="winscreen" class="z-2 position-absolute top-50 start-50 translate-middle bg-primary w-5 h-max">
+        <p id="winner">EL GANADOR ES: winner</p>
+    </div>
+
     <section class="d-flex justify-content-around align-items-center">
 
-        <div>
-            <img src="img/player.jpg" alt="">
+        <div class="d-flex flex-column">
+            <div>
+                <img src="img/player.jpg" alt="">
+                <h2>PLAYER 1</h2>
+                <p id="p1puntos">0</p><p>puntos</p>
+            </div>
         </div>
 
         <div>
-            <button id="botonJ">JUGAR</button>
+            <button id="botonJugar" class="z-3 position-absolute">JUGAR</button>
+            <button id="botonVos">DISPARARLE</button>
+            <button id="botonYo">DISPARARME</button>
         </div>
 
-        <div>
-            <img src="img/enemy.jpg" alt="">
+        <div class="d-flex flex-column">
+            <div>
+                <img src="img/enemy.jpg" alt="">
+                <h2>PLAYER 2</h2>
+                <p id="p2puntos">0</p><p>puntos</p>
+            </div>
         </div>
 
     </section>
     
-<script src="moneda.js"></script>
+<script src="russian.js"></script>
 </body>
 
 </html>

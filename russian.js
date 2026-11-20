@@ -1,34 +1,48 @@
-const botonJ = document.getElementById ("botonJ");
-const botonY = document.getElementById ("botonY");
-const botonV = document.getElementById ("botonV");
-const winscreen = document.getElementById ("winner");
-const lossscreen = document.getElementById ("losser");
+const botonJugar = document.getElementById ("botonJugar");
+const botonYo = document.getElementById ("botonYo");
+const botonVos = document.getElementById ("botonVos");
+const winscreen = document.getElementById ("winscreen");
+const winner = document.getElementById ("winner");
+const p1puntos = document.getElementById ("p1puntos");
+const p2puntos = document.getElementById ("p2puntos");
 let posicionActual = 0;
 let posicionBala = 0;
+let miTurno = true;
+let puntajep1 = 0;
+let puntajep2 = 0;
 
-botonJ.addEventListener ("click", iniciarjuego);
+botonYo.style.display = "none";
 
-function iniciarjuego () {
+botonVos.style.display = "none";
+
+winscreen.style.display = "none";
+
+botonJugar.addEventListener ("click", iniciarjuego);
+
+function iniciarjuego() {
     posicionActual = 0;
-    posicionBala = 0
+    posicionBala = 0;
+    miTurno = true;
+
+    cargartambor();
     
-    botonj.style.display = "none";
+    botonJugar.style.display = "none";
 
-    botonY.style.display = "inline-block";
+    winscreen.style.display = "none";
 
-    botonV.style.display = "inline-block";
+    botonYo.style.display = "block";
+
+    botonVos.style.display = "block";
 }
 
-function cargartambor () {
+function cargartambor() {
     //let posicionActual = Math.floor(Math.random() * 6) + 1;
     //return posicionActual;
     
     posicionBala = Math.floor(Math.random() * 6) + 1;
 }
 
-cargartambor ();
-
-botonV.addEventListener ("click", vos)
+botonVos.addEventListener ("click", vos)
 
 function hayBala () {
     if (posicionActual == posicionBala) {
@@ -38,30 +52,51 @@ function hayBala () {
 }
 
 function vos() {
-    if (hayBala) {
-        win ();
+    if (hayBala()) {
+        if (miTurno == true){
+            win(1);
+        } else {
+            win(2);
+        }
+        
     }else {
         posicionActual ++;
     }
 }
 
 function yo() {
-    if (hayBala) {
-        loss ();
+    if (hayBala()) {
+        if (miTurno == true) {
+           win(2);
+        } else {
+            win(1);
+        }
+        
     }else {
         posicionActual ++;
     }
 }
 
-function win () {
-    winner.style.display = "in block";
+function win (numero) {
+
+    botonYo.style.display = "none";
+    botonVos.style.display = "none";
+    winscreen.style.display = "block";
+    botonJugar.style.display = "block";
+
+    if (numero == 1){
+        winner.replace = "winner", "player 1";
+        puntajep1 ++;
+        p1puntos.innerHTML = puntajep1;
+    } else {
+        winner.replace = "winner", "player 2";
+        puntajep2 ++;
+        p2puntos.innerHTML = puntajep2;
+
+    }
 }
 
-function loss () {
-    losser.style.display = "in block";
-}
-
-//agregar aparecer boton de jugar de nuevo, te lleve a la funcion iniciar juego -> q esta funcion desaparezca la "win/loss screen".
-//agregar turnos.
-//agregar puntaje.
+//agregar aparecer boton de jugar de nuevo, te lleve a la funcion iniciar juego -> q esta funcion desaparezca la "winscreen". HECHO✔
+//agregar turnos. HEHCO✔
+//agregar puntaje. HECHO ✔
 
