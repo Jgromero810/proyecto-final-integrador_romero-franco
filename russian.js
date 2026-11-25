@@ -1,28 +1,31 @@
 const botonJugar = document.getElementById ("botonJugar");
-const botonYo = document.getElementById ("botonYo");
-const botonVos = document.getElementById ("botonVos");
+const botondispararme = document.getElementById ("botondispararme");
+const botondisparar = document.getElementById ("botondisparar");
 const winscreen = document.getElementById ("winscreen");
+const emptyscreen = document.getElementById ("emptyscreen");
 const winner = document.getElementById ("winner");
 const p1puntos = document.getElementById ("p1puntos");
 const p2puntos = document.getElementById ("p2puntos");
 let posicionActual = 0;
 let posicionBala = 0;
-let miTurno = true;
+let turnoplayer1 = true;
 let puntajep1 = 0;
 let puntajep2 = 0;
 
-botonYo.style.display = "none";
+botondispararme.style.display = "none";
 
-botonVos.style.display = "none";
+botondisparar.style.display = "none";
 
 winscreen.style.display = "none";
+
+emptyscreen.style.display = "none";
 
 botonJugar.addEventListener ("click", iniciarjuego);
 
 function iniciarjuego() {
     posicionActual = 0;
     posicionBala = 0;
-    miTurno = true;
+    turnoplayer1 = true;
 
     cargartambor();
     
@@ -30,9 +33,9 @@ function iniciarjuego() {
 
     winscreen.style.display = "none";
 
-    botonYo.style.display = "block";
+    botondispararme.style.display = "block";
 
-    botonVos.style.display = "block";
+    botondisparar.style.display = "block";
 }
 
 function cargartambor() {
@@ -42,8 +45,6 @@ function cargartambor() {
     posicionBala = Math.floor(Math.random() * 6) + 1;
 }
 
-botonVos.addEventListener ("click", vos)
-
 function hayBala () {
     if (posicionActual == posicionBala) {
         return true
@@ -51,45 +52,53 @@ function hayBala () {
     return false
 }
 
-function vos() {
+botondisparar.addEventListener ("click", disparar)
+
+function disparar() {
     if (hayBala()) {
-        if (miTurno == true){
+        if (turnoplayer1 == true){
             win(1);
         } else {
             win(2);
         }
         
     }else {
+        emptyscreen.style.display = "block";
         posicionActual ++;
+        turnoplayer1 = !turnoplayer1;
     }
 }
 
-function yo() {
+botondispararme.addEventListener ("click", dispararme)
+
+function dispararme() {
     if (hayBala()) {
-        if (miTurno == true) {
+        if (turnoplayer1 == true) {
            win(2);
         } else {
             win(1);
         }
         
     }else {
+        emptyscreen.style.display = "block";
         posicionActual ++;
+        turnoplayer1 = !turnoplayer1;
     }
 }
 
 function win (numero) {
 
-    botonYo.style.display = "none";
-    botonVos.style.display = "none";
+    botondispararme.style.display = "none";
+    botondisparar.style.display = "none";
     winscreen.style.display = "block";
     botonJugar.style.display = "block";
 
     if (numero == 1){
-        winner.replace = "winner", "player 1";
+        winner.innerHTML = "GANO EL PLAYER 1."
         puntajep1 ++;
         p1puntos.innerHTML = puntajep1;
-    } else {
-        winner.replace = "winner", "player 2";
+    } if (numero == 2){
+        winner.innerHTML = "GANO EL PLAYER 2."
         puntajep2 ++;
         p2puntos.innerHTML = puntajep2;
 
@@ -97,6 +106,9 @@ function win (numero) {
 }
 
 //agregar aparecer boton de jugar de nuevo, te lleve a la funcion iniciar juego -> q esta funcion desaparezca la "winscreen". HECHO✔
-//agregar turnos. HEHCO✔
-//agregar puntaje. HECHO ✔
+//agregar turnos. HEHCO✔; que funcione:
+//agregar puntaje. HECHO ✔; que funcione:
+//TODO: implementar boton disparar
+//TODO: implementar feedback al presionar un boton
+//TODO: implementar los turnos
 
